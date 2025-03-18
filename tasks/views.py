@@ -19,3 +19,4 @@ class TaskViewSet(viewsets.ModelViewSet):
             task = serializer.save(created_by=self.request.user)  
             send_task_creation_email.delay(task.id)
            
+

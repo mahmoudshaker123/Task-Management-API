@@ -1,7 +1,14 @@
 from rest_framework import serializers
 from .models import Account
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model
+from tasks.models import Task
 
+
+User = get_user_model()
+
+
+  
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
@@ -40,3 +47,19 @@ class LoginSerializer(serializers.Serializer):
                 'refresh': str(refresh),
             }
         raise serializers.ValidationError("Invalid credentials")
+
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    tasks_created = serializers.SerializerMethodField()
+    tasks_assigned = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'tasks_created', 'tasks_assigned']
+
+    def get_tasks_created(self, obj):
+        return obj.tasks_created.values('id', 'title', 'status', 'priority', 'due_date')
+
+    def get_tasks_assigned(self, obj):
+        return obj.tasks_assigned.values('id', 'title', 'status', 'priority', 'due_date')

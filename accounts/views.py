@@ -1,11 +1,16 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics, permissions
+
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from .models import Account
-from .serializers import UserSerializer , RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer , RegisterSerializer, LoginSerializer ,UserProfileSerializer
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 # Register user
 
@@ -44,3 +49,10 @@ class UserDetailView(APIView):
         user = request.user
         return Response(UserSerializer(user).data)
 
+
+class UserProfileView(generics.RetrieveAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
