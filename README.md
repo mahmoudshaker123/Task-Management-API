@@ -36,7 +36,7 @@ This is a Task Management API that allows users to create, manage, and track tas
   - List of tasks assigned to them
   - List of tasks created by them
 
-### 5. Bonus Features (Optional)
+### 5. Bonus Features)
 - Pagination for task lists.
 - Email notifications for task assignments or due date reminders.
 - Search functionality for tasks by title or description.
