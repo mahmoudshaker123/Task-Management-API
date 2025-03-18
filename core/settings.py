@@ -164,9 +164,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.Account'
 
 
+# Email
+
 EMAIL_BACKEND = env("EMAIL_BACKEND")
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_PORT = env.int("EMAIL_PORT")
 EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+
+
+# Celery
+
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+INSTALLED_APPS += ['django_celery_beat']
