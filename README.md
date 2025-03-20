@@ -123,6 +123,27 @@ docker-compose exec djangoserver python manage.py createsuperuser
 ### 4. Access the Application
 - API Base URL: `http://localhost:8000/api/`
 
+### 5. API Endpoints
+
+## Authentication
+
+- **Register**: `POST /api/auth/register/`
+- **Login**: `POST /api/login/`
+- **Refresh Token**: `POST /api/token/refresh/`
+
+## Tasks
+
+- **List Tasks**: `GET /api/tasks/`
+- **Retrieve Task**: `GET /api/tasks/{id}/`
+- **Create Task**: `POST /api/tasks/`
+- **Update Task**: `PUT /api/tasks/{id}/`
+- **Delete Task**: `DELETE /api/tasks/{id}/`
+
+## User Profile
+
+- **Retrieve Profile**: `GET /api/profile/`
+
+
 
 ## Author
 Developed by [Mahmoud shaker].
